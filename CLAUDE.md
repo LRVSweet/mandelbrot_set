@@ -196,18 +196,18 @@ the test path.
 ```cpp
 TEST_CASE("StableIterationsContainer", "[StableIterationsContainer]") {
 
-    SECTION("operator[][]") {
+    SECTION("at()") {
 
         SECTION("given a valid 2D index") {
 
             SECTION("returns the correct iteration count for the first element") {
                 StableIterationsContainer container(/* ... */);
-                CHECK(container[0][0] == 10);
+                CHECK(container.at(0, 0) == 10);
             }
 
             SECTION("returns the correct iteration count for a mid-row element") {
                 StableIterationsContainer container(/* ... */);
-                CHECK(container[0][1] == 20);
+                CHECK(container.at(0, 1) == 20);
             }
         }
 
@@ -215,7 +215,7 @@ TEST_CASE("StableIterationsContainer", "[StableIterationsContainer]") {
 
             SECTION("throws std::out_of_range") {
                 StableIterationsContainer container(/* ... */);
-                REQUIRE_THROWS_AS(container[99][99], std::out_of_range);
+                REQUIRE_THROWS_AS(container.at(99, 99), std::out_of_range);
             }
         }
     }

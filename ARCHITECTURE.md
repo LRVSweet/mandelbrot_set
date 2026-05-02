@@ -88,7 +88,7 @@ The current architecture uses a synchronous game loop. At high iteration counts,
 ## Memory Model
 
 ### `StableIterationsContainer` Layout
-The backing store is a **flat `std::vector<unsigned int>`** with **row-major layout**. The public `[row][col]` operator is an abstraction over `data[row * width + col]`. This ensures contiguous memory access during sequential iteration, which is critical for cache performance in the hot loop and the rendering layer.
+The backing store is a **flat `std::vector<unsigned int>`** with **row-major layout**. The public `.at(row, col)` method is an abstraction over `data[row * width + col]`. This ensures contiguous memory access during sequential iteration, which is critical for cache performance in the hot loop and the rendering layer.
 
 A `vector<vector<unsigned int>>` layout is explicitly prohibited — it produces per-row heap allocations and pointer indirection that thrashes the cache.
 
@@ -136,7 +136,7 @@ The Mandelbrot set has analytically known values that serve as ground truth for 
 
 ### Testing Seams
 The architecture creates natural unit test boundaries:
-- `StableIterationsContainer`: Test `[row][col]` access, bounds behavior, and memory layout invariants.
+- `StableIterationsContainer`: Test `.at(row, col)` access, bounds behavior, and memory layout invariants.
 - `SerialCalculationEngine`: Test against reference correctness points above. This is the correctness baseline for all other engine implementations.
 - `ParallelCalculationEngine`: Must produce **identical output** to `SerialCalculationEngine` for all inputs. Tested by direct comparison.
 - `Coordinator`: Test game loop logic (pan/zoom → `VisualizationRange` calculation) with mock `IUserInterface` and `ICalculationEngine` implementations.
@@ -167,7 +167,7 @@ The following describes a **pan event** as a representative example of the full 
 Container for the number of stable Mandelbrot iterations at each pixel in the visualization.
 
 - **Backing store**: Flat `std::vector<unsigned int>`, row-major layout
-- **Access**: `operator[row][col]` implemented as `data[row * width + col]`
+- **Access**: `.at(row, col)` implemented as a bounds-checked lookup into `data[row * width + col]`; throws `std::out_of_range` on invalid indices
 - **Ownership**: Returned by value from `calculateStableIterations()`; move semantics apply
 
 ### `struct VisualizationRange`
