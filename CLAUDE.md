@@ -72,8 +72,9 @@ void processResult(const StableIterationsContainer& counts) {
 **Correct — single call per control body:**
 ```cpp
 void processResult(const StableIterationsContainer& counts) {
-    if (_isHighIterationPoint(counts, 0, 0))
+    if (_isHighIterationPoint(counts, 0, 0)) {
         _applyHighValueProcessing(counts, 0, 0);
+    }
 }
 ```
 
@@ -143,8 +144,11 @@ StableIterationsContainer calculateStableIterations(VisualizationRange range);
 ### Error Handling
 
 - Never fail silently.
-- Throw descriptive exceptions. Prefer standard library types (`std::invalid_argument`,
-  `std::out_of_range`, `std::runtime_error`) unless none is adequately descriptive.
+- Throw descriptive exceptions. Prefer custom exception classes that carry
+  structured context. Derive all custom exceptions from `std::runtime_error`
+  or `std::logic_error` so they participate in the standard catch hierarchy.
+  Use standard library types only for simple, unambiguous cases where a
+  custom class would add no additional clarity.
 - Use `assert()` for internal invariants in debug builds.
 
 ---
