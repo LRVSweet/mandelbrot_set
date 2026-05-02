@@ -19,4 +19,17 @@ TEST_CASE("StableIterationsContainer", "[StableIterationsContainer]") {
             CHECK(container.getHeight() == 5u);
         }
     }
+
+    SECTION("at()") {
+
+        SECTION("given a valid index") {
+
+            SECTION("stores and returns the value at the specified location") {
+                StableIterationsContainer container(10u, 5u);
+                container.at(1u, 0u) = 42u;
+                const StableIterationsContainer& cref = container;
+                CHECK(cref.at(1u, 0u) == 42u);
+            }
+        }
+    }
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <vector>
 
 /**
@@ -40,4 +41,7 @@ private:
     unsigned int _width;
     unsigned int _height;
     std::vector<unsigned int> _data;
+
+    bool        _isOutOfRange(unsigned int row, unsigned int col) const;
+    std::string _outOfRangeMessage(unsigned int row, unsigned int col) const;
 };
