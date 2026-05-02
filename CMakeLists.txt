@@ -8,7 +8,10 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(Catch2 3 REQUIRED)
 find_package(trompeloeil REQUIRED)
 
-add_executable(mandelbrot src/main.cpp)
+add_executable(mandelbrot
+    src/main.cpp
+    src/StableIterationsContainer.cpp
+)
 target_include_directories(mandelbrot PRIVATE include)
 
 enable_testing()

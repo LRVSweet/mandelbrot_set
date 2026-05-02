@@ -1,6 +1,8 @@
 add_executable(mandelbrot_tests
     smoke_test.cpp
     VisualizationRangeTests.cpp
+    StableIterationsContainerTests.cpp
+    ${PROJECT_SOURCE_DIR}/src/StableIterationsContainer.cpp
 )
 
 target_include_directories(mandelbrot_tests PRIVATE ${PROJECT_SOURCE_DIR}/include)
