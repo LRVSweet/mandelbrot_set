@@ -1,0 +1,8 @@
+{
+  "name": "mandelbrot-set-v2",
+  "version-string": "0.1.0",
+  "dependencies": [
+    "catch2",
+    "trompeloeil"
+  ]
+}
