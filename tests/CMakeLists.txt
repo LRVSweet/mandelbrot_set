@@ -1,4 +1,7 @@
-add_executable(mandelbrot_tests smoke_test.cpp)
+add_executable(mandelbrot_tests
+    smoke_test.cpp
+    VisualizationRangeTests.cpp
+)
 
 target_include_directories(mandelbrot_tests PRIVATE ${PROJECT_SOURCE_DIR}/include)
 
