@@ -11,4 +11,12 @@ TEST_CASE("StableIterationsContainer", "[StableIterationsContainer]") {
             CHECK(container.getWidth() == 10u);
         }
     }
+
+    SECTION("getHeight()") {
+
+        SECTION("returns the height passed at construction") {
+            StableIterationsContainer container(10u, 5u);
+            CHECK(container.getHeight() == 5u);
+        }
+    }
 }

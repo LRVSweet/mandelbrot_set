@@ -1,7 +1,7 @@
 #include "StableIterationsContainer.hpp"
 
-StableIterationsContainer::StableIterationsContainer(unsigned int width, unsigned int /*height*/)
-    : _width(width), _height(0u), _data() {}
+StableIterationsContainer::StableIterationsContainer(unsigned int width, unsigned int height)
+    : _width(width), _height(height), _data() {}
 
 unsigned int& StableIterationsContainer::at(unsigned int /*row*/, unsigned int /*col*/) {
     static unsigned int dummy = 0u;
@@ -17,5 +17,5 @@ unsigned int StableIterationsContainer::getWidth() const {
 }
 
 unsigned int StableIterationsContainer::getHeight() const {
-    return 0u;
+    return _height;
 }
